@@ -1,0 +1,52 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: #2c2a29;
+}
+
+.hero-container {
+  background-image: url("/public/images/summer-sale-hero.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero {
+  letter-spacing: 0.14rem;
+}
+
+.navbar-container {
+  position: -webkit-sticky; 
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white; 
+  padding: 1rem 4rem;
+}
+
+#navbar-logo img {
+  max-height: 4rem;
+}
+
+.availability-status {
+  border: 2px solid #33cee5;
+  width: fit-content;
+  padding: 0.2rem 0.6rem;
+}
+
+.availability-status-div {
+  height: 3rem;
+}
+
+.rating-wrapper {
+  height: 2rem;
+}

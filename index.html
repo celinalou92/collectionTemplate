@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./dist/output.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="public/css/styles.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <title>Product Gallery</title>
+  </head>
+  <body>
+    <header class="navbar-container flex flex-row justify-between items-center">
+      <a href="/" id="navbar-logo">
+        <img
+          src="/public/images/jellycat-logo-250x100.webp"
+          alt="Click to Visit Home - Official Jellycat Store"
+        />
+      </a>
+
+      <div class="shopping-bag">
+        <a href="/" class="flex flex-row items-center justify-between">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-8"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+            />
+          </svg>
+          <p>( <span id="bag-item-count" class="px-1">0</span> )</p>
+        </a>
+      </div>
+    </header>
+    <main>
+      <div class="hero-container min-h-96">
+        <div
+          class="hero min-h-96 flex flex-col justify-center p-8 bg-gradient-to-b from-cyan-500 from-2% via-cyan-500 via-5% text-stone-100 tracking-wider gap-4"
+        >
+          <p class="bread-crumbs drop-shadow-md font-thin text-sm">
+            Home / Beauty / Essence
+          </p>
+          <h1 class="drop-shadow-md text-3xl uppercase">Summertime Sale!</h1>
+          <h3 class="drop-shadow-md font-thin">
+            Find the best deals of the summer on just about anything!
+          </h3>
+          <div class="flex flex-row items-center h-1/4"></div>
+        </div>
+      </div>
+      <div id="gallery" class="p-4">
+        <div class="m-2">
+          <div>
+            <div
+              id="gallery-item-component"
+              class="grid xs:grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-3"
+            ></div>
+            <script id="gallery-template" type="text/x-handlebars-template">
+              {{#each products}}
+                <div class="p-2">
+                  <div class="availability-status-div">
+                    {{#if (notInStock availabilityStatus)}}
+                      <span class="availability-status font-light">
+                        {{availabilityStatus}}
+                      </span>
+                    {{/if}}
+                  </div>
+                  <div class="flex flex-col items-center text-center">
+                    <img
+                      class="cursor-pointer drop-shadow-md hover:drop-shadow-xl"
+                      src="{{thumbnail}}"
+                      alt="{{title}}"
+                    />
+                    <h3
+                      class="text-sm cursor-pointer leading-tight tracking-wide min-h-9"
+                    >{{title}}</h3>
+                    <br />
+                    {{#if discountPercentage}}
+                      <div class="flex flex-row">
+                        <p class="font-light px-2 tracking-wide line-through">
+                          ${{price}}
+                        </p>
+                        <p class="font-light tracking-wide">
+                          ${{calcDiscount price discountPercentage}}
+                        </p>
+                      </div>
+                    {{else}}
+                      <p class="font-light px-2 tracking-wide line-through">
+                        ${{price}}
+                      </p>
+                    {{/if}}
+                    <div
+                      class="rating-wrapper cursor-pointer flex flex-row items-center justify-end"
+                    >
+                      {{roundUp rating}}
+                      <span class="mx-1">({{reviews.length}})</span>
+                    </div>
+                    <button
+                      data-id="{{id}}"
+                      class="add-to-bag-btn bg-gradient-to-b from-cyan-300 to-cyan-200 from-80% border-solid border-2 border-stone-500 p-2 w-full text-stone-600 cursor-pointer hover:from-50% hover:to-cyan-400 hover:from-cyan-300 hover:border-stone-800 hover:text-stone-800 tracking-wide"
+                      aria-label="Add {{title}} to Bag"
+                    >Add to Bag</button>
+                  </div>
+                </div>
+              {{/each}}
+            </script>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="/public/js/index.js"></script>
+  </body>
+</html>
